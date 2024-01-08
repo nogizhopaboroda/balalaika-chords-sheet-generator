@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, useRadioGroup } from "@chakra-ui/react";
+import { Box, Center, Flex, HStack, useRadioGroup } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import data from "../../data";
 import { Data } from "../../types";
@@ -45,27 +45,30 @@ const ChordsSheet = () => {
   );
 
   return (
-    <Flex
-      sx={{
-        flexDirection: "column",
-        gap: "1rem",
-      }}
-    >
+    <Center>
       <Flex
         sx={{
-          alignItems: "center",
-          gap: "2rem",
-          paddingX: "1rem",
-          paddingY: "0.5rem",
+          flexDirection: "column",
+          gap: "3rem",
+          maxWidth: "64rem",
         }}
       >
-        <Box>Tuning:</Box>
-        <SectionSelector data={data} onChange={setTuning} />
+        <Flex
+          sx={{
+            alignItems: "center",
+            gap: "2rem",
+            paddingX: "1rem",
+            paddingY: "0.5rem",
+          }}
+        >
+          <Box>Tuning:</Box>
+          <SectionSelector data={data} onChange={setTuning} />
+        </Flex>
+        <Box>
+          {currentSection ? <ChordSection section={currentSection} /> : null}
+        </Box>
       </Flex>
-      <Box>
-        {currentSection ? <ChordSection section={currentSection} /> : null}
-      </Box>
-    </Flex>
+    </Center>
   );
 };
 
