@@ -24,6 +24,8 @@ const QuickSheet = ({ section }: { section: Data }) => {
   const [selectedChords, setSelectedChords] = useState<Array<string>>([]);
   const ref = useRef<HTMLDivElement>(null);
 
+  const [showCopyText, setShowCopyText] = useState(false);
+
   const options = section.data.map(({ title, chords }) => ({
     label: title,
     options: chords.map(({ title }) => ({
@@ -85,14 +87,17 @@ const QuickSheet = ({ section }: { section: Data }) => {
               top: 0,
             }}
             size="xs"
-            onClick={() => {
+            onClick={async () => {
               if (!ref.current) {
                 return;
               }
               getScreenShot(ref.current);
+              setShowCopyText(true);
+              await new Promise((r) => setTimeout(r, 2000));
+              setShowCopyText(false);
             }}
           >
-            Copy image
+            {showCopyText ? "Copied" : "Copy image"}
           </Button>
         </Flex>
       ) : null}
