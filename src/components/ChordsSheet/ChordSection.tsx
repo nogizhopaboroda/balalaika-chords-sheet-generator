@@ -1,9 +1,11 @@
+import { useCallback, useRef, useState } from "react";
+import Select from "react-select";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
 import type { ChordTuning, Data } from "../../types";
 import ChordGroupComponent from "./ChordGroup";
-import { useCallback, useRef, useState } from "react";
+import QuickSheet from "./QuickSheet";
 
 const ChordSection = ({ section }: { section: Data }) => {
   const ref = useRef<any>();
@@ -38,6 +40,8 @@ const ChordSection = ({ section }: { section: Data }) => {
         gap: "1rem",
       }}
     >
+      <QuickSheet section={section} />
+      <Divider />
       <Box
         sx={{
           width: "100%",
@@ -58,7 +62,11 @@ const ChordSection = ({ section }: { section: Data }) => {
         }}
       >
         {section.data.map((chordGroup, index) => (
-          <ChordGroupComponent key={index} group={chordGroup} tuning={section.tuning} />
+          <ChordGroupComponent
+            key={index}
+            group={chordGroup}
+            tuning={section.tuning}
+          />
         ))}
       </Box>
     </Box>
