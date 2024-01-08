@@ -1,11 +1,28 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import html2canvas from "html2canvas";
+import { useRef, useState } from "react";
 import Select from "react-select";
 import type { ChordData, Data } from "../../types";
 import Chord from "./Chord";
 
+const getScreenShot = async (element: HTMLElement) => {
+  const canvas = await html2canvas(element);
+
+  canvas.toBlob(function (blob) {
+    navigator.clipboard.write([
+      new ClipboardItem(
+        Object.defineProperty({}, blob!.type, {
+          value: blob,
+          enumerable: true,
+        }),
+      ),
+    ]);
+  });
+};
+
 const QuickSheet = ({ section }: { section: Data }) => {
   const [selectedChords, setSelectedChords] = useState<Array<string>>([]);
+  const ref = useRef<HTMLDivElement>(null);
 
   const options = section.data.map(({ title, chords }) => ({
     label: title,
@@ -50,10 +67,29 @@ const QuickSheet = ({ section }: { section: Data }) => {
         />
       </Flex>
       {selectedChords.length ? (
-        <Flex height="7rem">
-          {selectedChords.map((chord) => (
-            <Chord key={chord} chord={chords[chord]} tuning={section.tuning} />
-          ))}
+        <Flex flexDirection="column" gap="1rem">
+          <Flex height="7rem" justifyContent="center" ref={ref}>
+            {selectedChords.map((chord) => (
+              <Chord
+                key={chord}
+                chord={chords[chord]}
+                tuning={section.tuning}
+              />
+            ))}
+          </Flex>
+
+          <Box>
+            <Button
+              onClick={() => {
+                if (!ref.current) {
+                  return;
+                }
+                getScreenShot(ref.current);
+              }}
+            >
+              Copy chords image
+            </Button>
+          </Box>
         </Flex>
       ) : null}
     </Flex>
