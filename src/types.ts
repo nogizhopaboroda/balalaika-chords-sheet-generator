@@ -19,5 +19,6 @@ export interface ChordGroup {
 
 export interface Data {
   title: string;
+  tuning: ChordTuning;
   data: Array<ChordGroup>;
 }

@@ -69,7 +69,6 @@ const Chord = ({
           )
       : [];
 
-    ref.current.innerHTML = "";
     const newChart = new SVGuitarChord(ref.current);
     newChart
       .configure({
@@ -165,7 +164,7 @@ const Chord = ({
         /**
          * Space between the title and the chart
          */
-        titleBottomMargin: 80,
+        titleBottomMargin: 30,
 
         /**
          * Global color of the whole chart. Can be overridden with more specifig color settings such as
@@ -241,10 +240,12 @@ const Chord = ({
         barres: [],
       })
       .draw();
-    requestAnimationFrame(() => {
-      newChart.draw();
-    });
-  }, [ref.current]);
+
+    return () => {
+      newChart.clear();
+      newChart.remove();
+    };
+  }, [ref.current, tuning, frets]);
 
   return <div ref={ref} />;
 };

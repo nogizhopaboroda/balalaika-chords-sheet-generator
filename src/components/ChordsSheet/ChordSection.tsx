@@ -9,10 +9,6 @@ const ChordSection = ({ section }: { section: Data }) => {
   const ref = useRef<any>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const tuning = section.title
-    .match(/[A-Z\#]{1,2}-[A-Z\#]{1,2}-[A-Z\#]{1,2}/)?.[0]
-    .split("-") as ChordTuning;
-
   const downloadSection = useCallback(async () => {
     setIsLoading(() => true);
 
@@ -29,7 +25,7 @@ const ChordSection = ({ section }: { section: Data }) => {
     const height = doc.internal.pageSize.getHeight();
     doc.addImage(canvas, "PNG", 20, 10, width - 40, height - 20);
 
-    doc.save(`balalaika-chords-${tuning.join("-")}.pdf`);
+    doc.save(`balalaika-chords-${section.tuning.join("-")}.pdf`);
     setIsLoading(() => false);
   }, [ref.current]);
 
@@ -62,7 +58,7 @@ const ChordSection = ({ section }: { section: Data }) => {
         }}
       >
         {section.data.map((chordGroup, index) => (
-          <ChordGroupComponent key={index} group={chordGroup} tuning={tuning} />
+          <ChordGroupComponent key={index} group={chordGroup} tuning={section.tuning} />
         ))}
       </Box>
     </Box>

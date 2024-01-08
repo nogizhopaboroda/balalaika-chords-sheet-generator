@@ -3,6 +3,7 @@ import type { Data } from "./types";
 const dataExample: Array<Data> = [
   {
     title: "Tuning: C-E-G",
+    tuning: ["C", "E", "G"],
     data: [
       {
         title: "C",
@@ -1499,6 +1500,7 @@ const dataExample: Array<Data> = [
   },
   {
     title: "Tuning: G-H-D",
+    tuning: ["G", "H", "D"],
     data: [
       {
         title: "C",
@@ -2995,6 +2997,7 @@ const dataExample: Array<Data> = [
   },
   {
     title: "Tuning: D-F#-A",
+    tuning: ["D", "F#", "A"],
     data: [
       {
         title: "C",
