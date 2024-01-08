@@ -67,7 +67,7 @@ const QuickSheet = ({ section }: { section: Data }) => {
         />
       </Flex>
       {selectedChords.length ? (
-        <Flex flexDirection="column" gap="1rem">
+        <Flex flexDirection="column" gap="1rem" position="relative">
           <Flex height="7rem" justifyContent="center" ref={ref}>
             {selectedChords.map((chord) => (
               <Chord
@@ -78,18 +78,22 @@ const QuickSheet = ({ section }: { section: Data }) => {
             ))}
           </Flex>
 
-          <Box>
-            <Button
-              onClick={() => {
-                if (!ref.current) {
-                  return;
-                }
-                getScreenShot(ref.current);
-              }}
-            >
-              Copy chords image
-            </Button>
-          </Box>
+          <Button
+            sx={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+            }}
+            size="xs"
+            onClick={() => {
+              if (!ref.current) {
+                return;
+              }
+              getScreenShot(ref.current);
+            }}
+          >
+            Copy image
+          </Button>
         </Flex>
       ) : null}
     </Flex>
