@@ -52,7 +52,7 @@ const dataExample: Array<Data> = [
               },
               {
                 recommended: true,
-                strings: [3, 3, 5],
+                strings: [{ fret: 3, finger: 'T' }, { fret: 3, finger: 'T' }, { fret: 5, finger: 3 }],
               },
               {
                 recommended: true,

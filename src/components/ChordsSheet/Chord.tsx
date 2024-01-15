@@ -1,16 +1,24 @@
 import { useEffect, useRef } from "react";
 import { Finger, FretLabelPosition, Shape, SVGuitarChord } from "svguitar";
-import type { ChordData, ChordTuning, ChordVariant } from "../../types";
+import type {
+  ChordData,
+  ChordTuning,
+  ChordVariant,
+  Finger as ChordFinger,
+} from "../../types";
 
 const DEFAULT_TUNE: ChordTuning = ["C", "E", "G"];
 const DEFAULT_FRETS = 5;
 
-const pickVariant = (arr: ChordVariant[]): ChordVariant | null => {
-  const calculateDifference = (strings: number[]): number =>
-    Math.max(...strings) - Math.min(...strings);
+const getFret = (finger: ChordFinger): number =>
+  typeof finger === "object" ? finger.fret : finger;
 
-  const calculateSumOfDistances = (strings: number[]): number =>
-    strings.reduce((sum, x) => sum + Math.abs(x - 0), 0);
+const pickVariant = (arr: ChordVariant[]): ChordVariant | null => {
+  const calculateDifference = (strings: ChordFinger[]): number =>
+    Math.max(...strings.map(getFret)) - Math.min(...strings.map(getFret));
+
+  const calculateSumOfDistances = (strings: ChordFinger[]): number =>
+    strings.map(getFret).reduce((sum, x) => sum + Math.abs(x - 0), 0);
 
   let selectedVariant: ChordVariant | null = null;
   let minDifference = Infinity;
@@ -54,8 +62,8 @@ const Chord = ({
       chord.variants.filter(({ recommended }) => recommended),
     );
 
-    const min = Math.min(...bestVariant!.strings);
-    const max = Math.max(...bestVariant!.strings);
+    const min = Math.min(...bestVariant!.strings.map(getFret));
+    const max = Math.max(...bestVariant!.strings.map(getFret));
     const position = max > frets ? min : 1;
 
     const fingers: Finger[] = bestVariant
@@ -64,7 +72,21 @@ const Chord = ({
           .reverse()
           .reduce(
             (acc, fret, index) =>
-              fret === 0 ? acc : [...acc, [index + 1, fret - position + 1]],
+              fret === 0
+                ? acc
+                : [
+                    ...acc,
+                    [
+                      index + 1,
+                      getFret(fret) - position + 1,
+                      typeof fret === "object"
+                        ? {
+                            text: fret.finger.toString(),
+                            textColor: "white",
+                          }
+                        : undefined,
+                    ],
+                  ],
             [] as Finger[],
           )
       : [];
@@ -107,7 +129,7 @@ const Chord = ({
         /**
          * Size of a finger or barre relative to the string spacing
          */
-        fingerSize: 0.45,
+        fingerSize: 0.50,
 
         /**
          * Color of a finger or barre
@@ -122,7 +144,7 @@ const Chord = ({
         /**
          * The size of text inside fingers and barres
          */
-        fingerTextSize: 22,
+        fingerTextSize: 35,
 
         /**
          * stroke color of a finger or barre. Defaults to the finger color if not set
