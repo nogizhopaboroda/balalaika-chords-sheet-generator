@@ -13,20 +13,46 @@ const dataExample: Array<Data> = [
             notes: ["C", "E", "G"],
             variants: [
               {
+                title: "C53",
                 recommended: true,
                 strings: [0, 0, 0],
               },
               {
-                recommended: false,
-                strings: [0, 3, 9],
-              },
-              {
-                recommended: false,
-                strings: [4, 8, 0],
-              },
-              {
+                title: "C5",
                 recommended: true,
-                strings: [4, 3, 5],
+                strings: [0, { fret: 3, finger: 3 }, 0],
+              },
+              {
+                title: "C5",
+                recommended: true,
+                strings: [0, { fret: 3, finger: 2 }, { fret: 5, finger: 4 }],
+              },
+              {
+                title: "C6",
+                recommended: true,
+                strings: [
+                  { fret: 4, finger: "T" },
+                  { fret: 3, finger: 1 },
+                  { fret: 5, finger: 3 },
+                ],
+              },
+              {
+                title: "C64",
+                recommended: true,
+                strings: [
+                  { fret: 12, finger: "T" },
+                  { fret: 13, finger: 2 },
+                  { fret: 14, finger: 3 },
+                ],
+              },
+              {
+                title: "C53",
+                recommended: true,
+                strings: [
+                  { fret: 12, finger: "T" },
+                  { fret: 12, finger: "T" },
+                  { fret: 12, finger: 2 },
+                ],
               },
               {
                 recommended: true,
@@ -52,7 +78,11 @@ const dataExample: Array<Data> = [
               },
               {
                 recommended: true,
-                strings: [{ fret: 3, finger: 'T' }, { fret: 3, finger: 'T' }, { fret: 5, finger: 3 }],
+                strings: [
+                  { fret: 3, finger: "T" },
+                  { fret: 3, finger: "T" },
+                  { fret: 5, finger: 3 },
+                ],
               },
               {
                 recommended: true,

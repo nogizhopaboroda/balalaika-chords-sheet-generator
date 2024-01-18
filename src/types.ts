@@ -1,8 +1,9 @@
 export type ChordTuning = [string, string, string];
 
-export type Finger = number | { finger: 'T' | 1 | 2 | 3, fret: number }
+export type Finger = number | { finger: 'T' | 1 | 2 | 3 | 4, fret: number }
 
 export interface ChordVariant {
+  title?: string;
   recommended: boolean;
   strings: [Finger, Finger, Finger]
 }
