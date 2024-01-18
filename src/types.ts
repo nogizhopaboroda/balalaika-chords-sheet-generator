@@ -5,6 +5,7 @@ export type Finger = number | { finger: 'T' | 1 | 2 | 3 | 4, fret: number }
 export interface ChordVariant {
   title?: string;
   recommended: boolean;
+  main?: true;
   strings: [Finger, Finger, Finger]
 }
 

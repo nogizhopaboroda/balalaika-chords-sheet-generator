@@ -2,6 +2,7 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import { useRef, useState } from "react";
 import Select from "react-select";
+import { pickVariant } from "../../helpers";
 import type { ChordData, Data } from "../../types";
 import Chord from "./Chord";
 
@@ -71,13 +72,15 @@ const QuickSheet = ({ section }: { section: Data }) => {
       {selectedChords.length ? (
         <Flex flexDirection="column" gap="1rem" position="relative">
           <Flex height="7rem" justifyContent="center" ref={ref}>
-            {selectedChords.map((chord) => (
-              <Chord
-                key={chord}
-                chord={chords[chord]}
-                tuning={section.tuning}
-              />
-            ))}
+            {selectedChords.map((chord) => {
+              const variant = pickVariant(chords[chord].variants);
+              if (!variant) {
+                return <b>no variant</b>;
+              }
+              return (
+                <Chord key={chord} title={chord} chord={variant} tuning={section.tuning} />
+              );
+            })}
           </Flex>
 
           <Button

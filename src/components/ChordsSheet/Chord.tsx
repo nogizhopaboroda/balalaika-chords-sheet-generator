@@ -1,17 +1,19 @@
 import { useEffect, useRef } from "react";
 import { Finger, FretLabelPosition, SVGuitarChord } from "svguitar";
 import { getFret, pickVariant } from "../../helpers";
-import type { ChordData, ChordTuning } from "../../types";
+import type { ChordData, ChordTuning, ChordVariant } from "../../types";
 
 const DEFAULT_TUNE: ChordTuning = ["C", "E", "G"];
 const DEFAULT_FRETS = 5;
 
 const Chord = ({
   chord,
+  title,
   tuning = DEFAULT_TUNE,
   frets = DEFAULT_FRETS,
 }: {
-  chord: ChordData;
+  chord: ChordVariant;
+  title?: string;
   tuning?: ChordTuning;
   frets?: number;
 }) => {
@@ -21,9 +23,7 @@ const Chord = ({
     if (!ref.current) {
       return;
     }
-    const bestVariant = pickVariant(
-      chord.variants.filter(({ recommended }) => recommended),
-    );
+    const bestVariant = chord;
 
     const min = Math.min(...bestVariant!.strings.map(getFret));
     const max = Math.max(...bestVariant!.strings.map(getFret));
@@ -72,7 +72,7 @@ const Chord = ({
         /**
          * These are the labels under the strings. Can be any string.
          */
-        tuning: tuning,
+        tuning,
 
         /**
          * The position of the fret label (eg. "3fr")
@@ -220,7 +220,7 @@ const Chord = ({
         fixedDiagramPosition: false,
       })
       .chord({
-        title: chord.title,
+        title: title ?? chord.title,
         fingers: fingers,
         barres: [],
       })

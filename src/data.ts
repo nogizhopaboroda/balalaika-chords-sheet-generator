@@ -16,6 +16,7 @@ const dataExample: Array<Data> = [
                 title: "C53",
                 recommended: true,
                 strings: [0, 0, 0],
+                main: true,
               },
               {
                 title: "C5",
@@ -40,9 +41,9 @@ const dataExample: Array<Data> = [
                 title: "C64",
                 recommended: true,
                 strings: [
-                  { fret: 12, finger: "T" },
-                  { fret: 13, finger: 2 },
-                  { fret: 14, finger: 3 },
+                  { fret: 7, finger: "T" },
+                  { fret: 8, finger: 2 },
+                  { fret: 9, finger: 3 },
                 ],
               },
               {
@@ -55,6 +56,7 @@ const dataExample: Array<Data> = [
                 ],
               },
               {
+                title: "C??",
                 recommended: true,
                 strings: [7, 8, 9],
               },
@@ -64,18 +66,18 @@ const dataExample: Array<Data> = [
             title: "Cm",
             notes: ["C", "D#", "G"],
             variants: [
-              {
-                recommended: false,
-                strings: [0, 11, 0],
-              },
-              {
-                recommended: false,
-                strings: [0, 3, 8],
-              },
-              {
-                recommended: false,
-                strings: [3, 8, 0],
-              },
+              // {
+              //   recommended: false,
+              //   strings: [0, 11, 0],
+              // },
+              // {
+              //   recommended: false,
+              //   strings: [0, 3, 8],
+              // },
+              // {
+              //   recommended: false,
+              //   strings: [3, 8, 0],
+              // },
               {
                 recommended: true,
                 strings: [

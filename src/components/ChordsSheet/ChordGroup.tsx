@@ -1,6 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import type { ChordData, ChordGroup, ChordTuning } from "../../types";
+import { getFret, pickVariant } from "../../helpers";
 import Chord from "./Chord";
 
 interface ChordGroupComponentProps {
@@ -16,6 +17,29 @@ const ChordWrapper = ({
   tuning?: ChordTuning;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const variant = pickVariant(chord.variants);
+  if (!variant) {
+    return null;
+  }
+  if (isExpanded) {
+    return (
+      <Flex
+        sx={{
+          cursor: "pointer",
+        }}
+        onClick={() => setIsExpanded((val) => !val)}
+      >
+        {chord.variants.map((variant, index) => (
+          <Chord
+            key={index}
+            chord={variant}
+            title={variant.title ?? chord.title}
+            tuning={tuning}
+          />
+        ))}
+      </Flex>
+    );
+  }
   return (
     <Box
       sx={{
@@ -23,7 +47,7 @@ const ChordWrapper = ({
       }}
       onClick={() => setIsExpanded((val) => !val)}
     >
-      <Chord chord={chord} tuning={tuning} />
+      <Chord chord={variant} title={chord.title} tuning={tuning} />
     </Box>
   );
 };
