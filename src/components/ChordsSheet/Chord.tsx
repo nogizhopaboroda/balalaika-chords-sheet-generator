@@ -1,47 +1,10 @@
 import { useEffect, useRef } from "react";
-import { Finger, FretLabelPosition, Shape, SVGuitarChord } from "svguitar";
-import type {
-  ChordData,
-  ChordTuning,
-  ChordVariant,
-  Finger as ChordFinger,
-} from "../../types";
+import { Finger, FretLabelPosition, SVGuitarChord } from "svguitar";
+import { getFret, pickVariant } from "../../helpers";
+import type { ChordData, ChordTuning } from "../../types";
 
 const DEFAULT_TUNE: ChordTuning = ["C", "E", "G"];
 const DEFAULT_FRETS = 5;
-
-const getFret = (finger: ChordFinger): number =>
-  typeof finger === "object" ? finger.fret : finger;
-
-const pickVariant = (arr: ChordVariant[]): ChordVariant | null => {
-  const calculateDifference = (strings: ChordFinger[]): number =>
-    Math.max(...strings.map(getFret)) - Math.min(...strings.map(getFret));
-
-  const calculateSumOfDistances = (strings: ChordFinger[]): number =>
-    strings.map(getFret).reduce((sum, x) => sum + Math.abs(x - 0), 0);
-
-  let selectedVariant: ChordVariant | null = null;
-  let minDifference = Infinity;
-  let minDistanceSum = Infinity;
-
-  for (const variant of arr) {
-    const { strings } = variant;
-    const difference = calculateDifference(strings);
-    const distanceSum = calculateSumOfDistances(strings);
-
-    // Prioritize by distance to zero, then by difference
-    if (
-      distanceSum < minDistanceSum ||
-      (distanceSum === minDistanceSum && difference < minDifference)
-    ) {
-      minDifference = difference;
-      minDistanceSum = distanceSum;
-      selectedVariant = variant;
-    }
-  }
-
-  return selectedVariant;
-};
 
 const Chord = ({
   chord,
@@ -129,7 +92,7 @@ const Chord = ({
         /**
          * Size of a finger or barre relative to the string spacing
          */
-        fingerSize: 0.50,
+        fingerSize: 0.5,
 
         /**
          * Color of a finger or barre
