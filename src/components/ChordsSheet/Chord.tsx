@@ -27,7 +27,7 @@ const Chord = ({
 
     const min = Math.min(...bestVariant!.strings.map(getFret));
     const max = Math.max(...bestVariant!.strings.map(getFret));
-    const position = max > frets ? min : 1;
+    const position = max > frets ? (min || 1) : 1;
 
     const fingers: Finger[] = bestVariant
       ? bestVariant.strings
