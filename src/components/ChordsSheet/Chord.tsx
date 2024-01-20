@@ -107,7 +107,7 @@ const Chord = ({
         /**
          * The size of text inside fingers and barres
          */
-        fingerTextSize: 35,
+        fingerTextSize: 55,
 
         /**
          * stroke color of a finger or barre. Defaults to the finger color if not set
