@@ -62,11 +62,14 @@ const ChordSection = ({ section }: { section: Data }) => {
         }}
       >
         {section.data.map((chordGroup, index) => (
-          <ChordGroupComponent
-            key={index}
-            group={chordGroup}
-            tuning={section.tuning}
-          />
+          <>
+            <Divider />
+            <ChordGroupComponent
+              key={index}
+              group={chordGroup}
+              tuning={section.tuning}
+            />
+          </>
         ))}
       </Box>
     </Box>
