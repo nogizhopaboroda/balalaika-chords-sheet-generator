@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import Select from "react-select";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, StackDivider, Text, VStack } from "@chakra-ui/react";
 import type { ChordTuning, Data } from "../../types";
 import ChordGroupComponent from "./ChordGroup";
 import QuickSheet from "./QuickSheet";
@@ -53,17 +53,18 @@ const ChordSection = ({ section }: { section: Data }) => {
           Download PDF
         </Button>
       </Box>
-      <Box
+      <Divider />
+      <VStack
         ref={ref}
         sx={{
           display: "flex",
           flexDirection: "column",
           gap: "3rem",
         }}
+        divider={<StackDivider borderColor='gray.200' />}
       >
         {section.data.map((chordGroup, index) => (
           <>
-            <Divider />
             <ChordGroupComponent
               key={index}
               group={chordGroup}
@@ -71,7 +72,7 @@ const ChordSection = ({ section }: { section: Data }) => {
             />
           </>
         ))}
-      </Box>
+      </VStack>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Divider, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import type { ChordData, ChordGroup, ChordTuning } from "../../types";
 import { getFret, pickVariant } from "../../helpers";
@@ -23,21 +23,24 @@ const ChordWrapper = ({
   }
   if (isExpanded) {
     return (
-      <Flex
-        sx={{
-          cursor: "pointer",
-        }}
-        onClick={() => setIsExpanded((val) => !val)}
-      >
-        {chord.variants.map((variant, index) => (
-          <Chord
-            key={index}
-            chord={variant}
-            title={variant.title ?? chord.title}
-            tuning={tuning}
-          />
-        ))}
-      </Flex>
+      <>
+        <Flex
+          sx={{
+            cursor: "pointer",
+          }}
+          onClick={() => setIsExpanded((val) => !val)}
+        >
+          {chord.variants.map((variant, index) => (
+            <Chord
+              key={index}
+              chord={variant}
+              title={variant.title ?? chord.title}
+              tuning={tuning}
+            />
+          ))}
+        </Flex>
+        <Divider orientation="vertical" />
+      </>
     );
   }
   return (
