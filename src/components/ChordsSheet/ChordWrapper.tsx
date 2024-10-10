@@ -31,6 +31,7 @@ const ChordWrapper = ({
               chord={variant}
               title={variant.title ?? chord.title}
               tuning={tuning}
+              frets={6}
             />
           ))}
         </Flex>
