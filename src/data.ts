@@ -960,7 +960,11 @@ const dataExample: Array<Data> = [
               },
               {
                 recommended: true,
-                strings: [2, 3, 3],
+                strings: [
+                  { fret: 2, finger: "T" },
+                  { fret: 3, finger: 2 },
+                  { fret: 3, finger: 3 },
+                ],
               },
             ],
           },
@@ -986,7 +990,11 @@ const dataExample: Array<Data> = [
               },
               {
                 recommended: true,
-                strings: [5, 3, 4],
+                strings: [
+                  { fret: 5, finger: "T" },
+                  { fret: 3, finger: 1 },
+                  { fret: 4, finger: 2 },
+                ],
               },
             ],
           },
@@ -1464,7 +1472,11 @@ const dataExample: Array<Data> = [
               },
               {
                 recommended: true,
-                strings: [2, 1, 3],
+                strings: [
+                  { fret: 2, finger: "T" },
+                  { fret: 1, finger: 1 },
+                  { fret: 3, finger: 3 },
+                ],
               },
               {
                 recommended: true,
